@@ -36,7 +36,7 @@ export async function testMUni(): Promise<void> {
 
 ### Step III - run your Tests!
 ```typescript
-import * as muni from '../main/muni/'
+import * as muni from '@mmit/muni'
 
 export async function main(): Promise<void> {
     muni.resetIndicator()
