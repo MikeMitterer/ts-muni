@@ -1,0 +1,111 @@
+// -------------------------------------------------------------------------------------------------
+// Die .lib-Version exkludiert src/browser das dieses Dir nur zum testen
+// im browser benötigt wird
+//
+// Dieses File wird auch in packages#buidl.ts verwendet (zum erstellen der Lib)
+//
+// Weitere Infos:
+//    https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
+//      https://www.typescriptlang.org/docs/handbook/compiler-options.html
+//
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "incremental": true,
+        "tsBuildInfoFile": "./.ts.cache/tsconfig.tsbuildinfo",
+
+        "strict": true,
+
+        "target": "esnext",
+
+        // "rootDir": "./src",
+        "outDir": "./lib",
+
+        "module": "esnext",
+        "moduleResolution": "node",
+
+        "sourceMap": true,
+        // "inlineSourceMap": true,
+
+        // Essentiell damit die source-maps im Browser funktionieren
+        "inlineSources": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "noEmitOnError": true,
+        "strictNullChecks": true,
+        "preserveConstEnums": true,
+        "removeComments": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+                                      
+        // Muss auf true sein da sonst z.B. keine Images
+        // oder JS-Libs ohne expliziten export importiert werden können
+        // "allowSyntheticDefaultImports": true,
+
+        "strictFunctionTypes": true,
+
+        // Enables emit interoperability between CommonJS and ES Modules
+        // via creation of namespace object for all imports.
+        // Implies 'allowSyntheticDefaultImports'
+        //
+        // Import von Images funkt nicht mehr
+        // "esModuleInterop": true,
+
+        // Dient zum importieren von json-Files
+        // "resolveJsonModule": true,
+
+        "esModuleInterop": true,
+
+        // wird mit tsc erstellt
+        "declaration": true,
+
+        // Hier landen die types - sonst kommen sie
+        // ins outDir
+        //
+        //"declarationDir" :               "dist",
+
+        "baseUrl": "./src",
+        // "paths": {
+            // Pfade müssen auch in WebPack entsprechend definiert sein!
+            // Funktioniert nicht richtig!
+            //  https://github.com/Microsoft/TypeScript/issues/10866
+            //
+            // "@main/*": ["main/*"]
+            // "@test/*":                     [ "test/ts/*"],
+            // "@images/*":                   [ "site/images/*"]
+        // },
+
+        "lib": ["esnext", "dom"],
+        // "lib": [ "dom"],
+        // "types": ["node"],
+
+        // Fallback wenn nach d.ts Files gesucht wird
+        "typeRoots": ["./src/global.d.ts", "node_modules/@types"]
+    },
+    // https://github.com/s-panferov/awesome-typescript-loader
+    "awesomeTypescriptLoaderOptions": {
+        "useCache": false,
+        "reportFiles": ["src/**/*.{ts,tsx}"]
+    },
+    "include": [
+        // "src/index.ts",
+        "src/main/**/*.ts",
+        // "test/**/*.ts"
+
+        // Damit werden die images erkannt
+        // "src/browser/**/*.ts",
+        // "src/site/images/typings.d.ts",
+        // "src/site/images",
+
+        // Damit funktioniert jest-extended
+        // "src/types/global.d.ts",
+        // "src/modules.d.ts"
+
+        // Es sollte nicht notwendig sein die Tests zu inkludieren!
+        // "src/test/**/*.ts"
+    ],
+    "exclude": ["lib", "node_modules"]
+}
