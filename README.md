@@ -1,54 +1,59 @@
-# Validate
-> Lightweight TS library for validating function arguments.
+# MUni - Microframework for Unit-Test in your browser
+> Lightweight TS library for unit-testing
 
 ## Installation
 
-    npm i @mmit/validate
-    yarn add @mmit/validate
-
-# API changed v 0.3.0
-The return value of the following functions changed from **boolean** to **string**:
-
-      isPassword
-      isAlphanumeric
-      isHex
-      isUuid
-      isUrl
-      isEmail
-      isHostname
-      matchesPattern
-
-`isIndexValid` returns now the validated **array value** instead of the array index      
+    yarn add -D @mmit/muni
 
 ## Usage
 
+### Step I - write your Tests
 ```typescript
-import * as validate from '@mmit/validate';
+export async function testMUni(): Promise<void> {
 
-validate.isHex('1234567890abcdef');
+    await test('MUNI - Basics', async (): Promise<void> => {
+        // tslint:disable-next-line:no-unused-expression
+        expect(true, 'Value should be true').to.be.true
+    })
 
-// This throws an ArgumentError with "'1234567890abcdefg' is not a hex value"
-validate.isHex('1234567890abcdefg');
+    await test('MUNI - Expect Exception', async (): Promise<void> => {
+        // tslint:disable-next-line:no-unused-expression
+        expect(():void => { throw new Error("Test") }, 'Expected an Exception...').to.throw()
+    })
 
-// The same but with your custom error message
-validate.isHex('1234567890abcdefg', () => 'My custom message');
-
-type MyName = string | undefined;
-
-const sayMyName = (name: MyName): MyName => name;
-
-// This would lead to: "Type 'string | undefined' is not assignable
-// to type 'string'
-// const checkedName = (name: MyName): string => sayMyName(name);
-
-// Checked version strips out "undefined"
-const checkedName = (name: MyName): string => validate.notNull(sayMyName(name));
-
-expect(checkedName("Mike")).toBe("Mike");
-expect(() => checkedName(undefined)).toThrow(ArgumentError);
+}
+```
+     
+### Step II - add this snippet in your HTML-Page
+```html
+<div id="unit-tests">
+    <h1>MUnit / Browser-Tests</h1>
+    <ul id="munit">
+        <!-- Unit-Tests -->
+    </ul>
+</div>
 ```
 
-For more examples - pls check out my [Tests](https://github.com/MikeMitterer/ts-validate/tree/master/src/test/unit/validate)
+### Step III - run your Tests!
+```typescript
+import * as muni from '../main/muni/'
+
+export async function main(): Promise<void> {
+    muni.resetIndicator()
+
+    await Promise.all([
+        await testMUni(),
+    ])
+
+    muni.setIndicatorTo(muni.errors === 0, { onError: (): void => {
+        console.error(`Unit-Tests failed with #${muni.errors} error(s)!`)
+    }})
+
+}
+
+```
+
+For more examples - pls check out my [Tests](https://github.com/MikeMitterer/ts-muni/tree/master/src/browser)
 
 ## Bugs / Contribute
 
@@ -60,7 +65,7 @@ Help is always welcome!
 
     MIT License
 
-    Copyright (c) 2019, Mike Mitterer <office@mikemitterer.at>
+    Copyright (c) 2021, Mike Mitterer <office@mikemitterer.at>
 
     Mike Mitterer: http://www.MikeMitterer.at/
 
