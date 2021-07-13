@@ -1,6 +1,10 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
+// Usage:
+//      E2E_TEST='true' jest src/test/e2e/browser.specs.ts
+const isE2ETest = process.env.E2E_TEST === 'true';
+
 module.exports = {
     preset: 'ts-jest',
 
@@ -199,3 +203,10 @@ module.exports = {
     // Whether to use watchman for file crawling
     // watchman: true,
 };
+
+if(isE2ETest) {
+    module.exports.globalSetup = "jest-environment-puppeteer/setup";
+    module.exports.globalTeardown = "jest-environment-puppeteer/teardown";
+    module.exports.testEnvironment = "jest-environment-puppeteer";
+}
+
