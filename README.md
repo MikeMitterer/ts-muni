@@ -9,6 +9,9 @@
 
 ### Step I - write your Tests
 ```typescript
+import { test} from '@mmit/muni'
+import { expect } from 'chai'
+
 export async function testMUni(): Promise<void> {
 
     await test('MUNI - Basics', async (): Promise<void> => {
@@ -34,7 +37,12 @@ export async function testMUni(): Promise<void> {
 </div>
 ```
 
-### Step III - run your Tests!
+### Step III - add this snippet to your main SCSS
+```scss
+@import "~@mmit/muni/css/muni.css";
+```
+
+### Step IV - run your Tests!
 ```typescript
 import * as muni from '@mmit/muni'
 

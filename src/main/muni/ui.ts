@@ -128,7 +128,7 @@ export function setIndicatorTo(state: 'success' | 'failed' | true | false, callb
         const div = document.getElementById("unit-tests") as HTMLDivElement
         const h1 = div.querySelector('h1') as HTMLHeadElement
         
-        document.title = 'Tests failed!'
+        document.title = '✗ Tests failed!'
 
         h1.style.backgroundColor = '#ff0000'
         
