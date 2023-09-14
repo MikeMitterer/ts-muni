@@ -23,7 +23,12 @@ export async function test(description: string, callback: () => Promise<void>): 
 
         await setState( { id, state: 'success', message: "Success!" })
     } catch(e) {
-        await setState( { id, state: 'failed', message: e.message })
+        if( e instanceof Error ) {
+            await setState( { id, state: 'failed', message: e.message })
+        } else {
+            await setState( { id, state: 'failed', message: `${e}` })
+        }
+
         errors++
 
         // tslint:disable-next-line:no-console
