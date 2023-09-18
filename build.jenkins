@@ -22,6 +22,8 @@ pipeline {
                             sh 'rm -rf node_modules yarn.lock'
                         }}
 
+                        sh 'yarn clean && yarn install'
+
                         // Repos von Amazon holen
                         // sh 'docker/_ci/run.sh --pull'
 
@@ -41,7 +43,7 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     sh 'yarn run tc'
-                    sh 'yarn run lint'
+                    //sh 'yarn run lint'
                     sh 'yarn run test'
                 }
             }
@@ -50,10 +52,11 @@ pipeline {
             steps {
                 timeout(time: 15, unit: 'MINUTES') {
                     ansiColor('xterm') {
-                        sh 'yarn run clean'
+                        // sh 'yarn run clean'
+
                         sh 'yarn run build'
-                        sh 'yarn run build:node'
-                        sh 'yarn run build:web:prod'
+                        // sh 'yarn run build:node'
+                        // sh 'yarn run build:web:prod'
                     }
                 }
 

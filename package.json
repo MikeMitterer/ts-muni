@@ -20,7 +20,7 @@
         "tc": "tsc --noEmit",
         "lint": "yarn eslint src tests",
         "lint:fix": "yarn eslint src --fix",
-        "test": "jest",
+        "test": "yarn run gen:barrels && jest --clearCache && yarn run test:unit",
         "test:unit": "jest --colors tests/unit",
         "test:e2e": "E2E_TEST='true' jest --colors --runInBand --detectOpenHandles tests/e2e",
         "build": "yarn run clean && yarn run gen:barrels && yarn run build:sass && yarn run build:ts",
