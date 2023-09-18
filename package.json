@@ -1,7 +1,7 @@
 {
     "name": "@mmit/muni",
     "author": "Mike Mitterer",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Unit-Testing-Framework (Browser only)",
     "keywords": [
         "unit test",
@@ -15,7 +15,8 @@
     "scripts": {
         "clean": "rm -rf lib dist bin",
         "clean:jest": "jest --clearCache",
-        "clean:all": "yarn clean && yarn clean:jest && rm -f yarn.lock && rm -rf node_modules && yarn clean cache",        "gen:barrels": "barrelsby --delete -d src/main/ -l all -s flat",
+        "clean:all": "yarn clean && yarn clean:jest && rm -f yarn.lock && rm -rf node_modules && yarn clean cache",
+        "gen:barrels": "barrelsby --delete -d src/main/ -l all -s flat",
         "serve": "NODE_ENV=development webpack serve --config webpack.web.js --mode development",
         "start": "yarn serve --open",
         "tc": "tsc --noEmit",
