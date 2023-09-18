@@ -13,8 +13,9 @@
     "main": "./lib/index.js",
     "typings": "./lib/index.d.ts",
     "scripts": {
-        "clean": "rm -rf lib dist bin css &&  rm -rf node_modules/@types/istanbul-reports && jest --clearCache && rm -rf .ts.cache && rm -rf .rollup.cache",
-        "gen:barrels": "barrelsby --delete -d src/main/ -l all -s flat",
+        "clean": "rm -rf lib dist bin",
+        "clean:jest": "jest --clearCache",
+        "clean:all": "yarn clean && yarn clean:jest && rm -f yarn.lock && rm -rf node_modules && yarn clean cache",        "gen:barrels": "barrelsby --delete -d src/main/ -l all -s flat",
         "serve": "NODE_ENV=development webpack serve --config webpack.web.js --mode development",
         "start": "yarn serve --open",
         "tc": "tsc --noEmit",
