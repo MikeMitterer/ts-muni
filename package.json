@@ -1,7 +1,7 @@
 {
     "name": "@mmit/muni",
     "author": "Mike Mitterer",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Unit-Testing-Framework (Browser only)",
     "type": "module",
     "keywords": [
