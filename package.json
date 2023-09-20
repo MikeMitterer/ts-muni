@@ -14,6 +14,13 @@
     "main": "./lib/index.js",
     "typings": "./lib/index.d.ts",
     "scripts": {
+        "version:pkg": "jq -r '.version' < package.json",
+        "version:pkg:full": "echo $(jq -r -j '.name' < package.json;echo ': ';yarn version:pkg)",
+        "version:remote": "curl --silent -X GET -H \"Authorization: token ${GH_TOKEN_READ_PRIVATE_REPO}\" \"https://raw.githubusercontent.com/$(cat ./.gitorg)/$(git repo)/master/package.json\" | jq -r \".version\" ",
+        "version:remote:full": "echo $(jq -r -j '.name' < package.json;echo ': ';yarn version:remote)",
+        "update": "yarn update:browser",
+        "update:browser": "browserslist --update-db",
+        "update:templates": "updateDevTemplates.sh -u",
         "clean": "rm -rf lib dist bin",
         "clean:jest": "jest --clearCache",
         "clean:all": "yarn clean && yarn clean:jest && rm -f yarn.lock && rm -rf node_modules && yarn clean cache",
