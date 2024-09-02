@@ -59,9 +59,14 @@ describe('puppeteer.ts', ():void => {
         // Holds the browser until we terminate the process explicitly
         // await browser.waitForTarget(() => false);
 
-        await page.waitForTimeout(5000)
+        let title = await page.title();
+        let timeoutCounter = 0
+        while (!title.startsWith('✔') && timeoutCounter < 5) {
+            await new Promise(r => setTimeout(r, 1000))
 
-        const title = await page.title()
-        expect(title).toStartWith('✔')
+            title = await page.title();
+            timeoutCounter++;
+        }
+        expect(title).toStartWith('✔');
     }, 100000)
 })
